@@ -1,0 +1,9 @@
+node_modules/
+dist/
+target/
+uploads/
+.env
+.idea/
+.vscode/
+*.log
+backend/error-log.txt
