@@ -53,6 +53,11 @@ npm run dev
 ```
 Open the Vite URL shown in the terminal.
 
+## Deploy frontend and backend
+The frontend must be built with `VITE_API_URL` set in Vercel to the public Spring Boot API URL ending in `/api` (for example, `https://your-backend.example.com/api`). Configure it for Production and redeploy. Do not use `localhost` for a public website.
+
+The Spring Boot backend must be hosted separately from the Vercel static frontend and connected to a remotely reachable MySQL database. Configure `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` on the backend host. `DB_URL` must be a JDBC MySQL URL for the hosted database. Set `CORS_ALLOWED_ORIGINS` on the backend to the exact public frontend origin, including `https://` and without a path; separate multiple origins with commas. Set `FRONTEND_URL` to the public frontend origin for password-reset links. Configure SMTP environment variables on the backend host if email features are needed. Keep database and SMTP credentials in host environment settings, never in Vercel frontend variables or source code.
+
 ## Important authentication note
 Registration requires email OTP verification. Password reset links expire after 30 minutes and can be used once.
 Campus security actions use expiring bearer sessions and are limited to the configured `CAMPUS_SECURITY_EMAIL`; the moderation page provides constrained report and claim review actions and does not execute arbitrary SQL. Claim and found-notice verification details are available only to Campus Security. Approval emails both parties to coordinate a handoff at the Campus Security desk; those emails do not include the private verification details.

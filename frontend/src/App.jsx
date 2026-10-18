@@ -4,8 +4,8 @@ import { deleteMyItem, deleteSecurityItem, emailReportOwner, getItems, getMyItem
 import './otp.css';
 
 const categories=['Electronics','Bags & Accessories','Documents','Clothing','Keys','Other'];
-const API_BASE=import.meta.env.VITE_API_URL||'http://localhost:8080/api';
-const imageUrlFor=(url)=>url?.startsWith('http')?url:`${API_BASE.replace(/\/api\/?$/,'')}${url}`;
+const API_BASE=(import.meta.env.VITE_API_URL?.trim()||(import.meta.env.DEV?'http://localhost:8080/api':'')).replace(/\/+$/,'');
+const imageUrlFor=(url)=>url?.startsWith('http')?url:`${API_BASE.replace(/\/api$/,'')}${url}`;
 function App(){
  const [items,setItems]=useState([]), [query,setQuery]=useState(''), [category,setCategory]=useState('All categories'), [status,setStatus]=useState('All statuses');
  const [modal,setModal]=useState(''), [notice,setNotice]=useState(''), [busy,setBusy]=useState(false), [mobileMenu,setMobileMenu]=useState(false);
